@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @kit.title %>
+</p>
+
+<p>
+  <b>Kit:</b>
+  <%= @kit.kit_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_kit_path(@kit) %> |
+<%= link_to 'Back', kits_path %>
+
+
+<h2>Child Kits</h2>
+<%# render @kits %>
+
+
+<h2>Products</h2>
+<table>
+  <%= render @products %>
+</table>
+
+<%= link_to 'Add Product' %>

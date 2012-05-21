@@ -1,0 +1,30 @@
+== Kits of Kits
+
+rake db:setup
+
+open a rails console & setup some local variables.
+p1 = Product.find 1
+p2 = Product.find 2
+
+k1 = Kit.find 1
+k2 = Kit.find 2
+
+#assign products to the kits
+k1.products << p1
+k2.products << p2
+
+#assign Kits to Kits
+k3 = Kit.find 3
+k3.children << [k1, k2]
+
+Kits can also have products & child Kits that have products
+k4 = Kit.find 4
+k4.products << p1
+k4.children << k1
+
+
+#The kits become a wrapper for the products.  To get back all the products
+k3.all_products_including_children
+k4.all_products_including_children
+
+
