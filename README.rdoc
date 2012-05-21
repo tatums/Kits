@@ -13,13 +13,13 @@ k1 = Kit.find 1
 k2 = Kit.find 2
 
 
-==assign products to the kits
+=assign products to the kits
 k1.products << p1
 
 k2.products << p2
 
 
-==assign Kits to Kits
+=assign Kits to Kits
 
 k3 = Kit.find 3
 
@@ -27,7 +27,7 @@ k3.children << [k1, k2]
 
 
 
-==Kits can also have products & child Kits that have products
+=Kits can also have products & child Kits that have products
 
 k4 = Kit.find 4
 
@@ -36,7 +36,7 @@ k4.products << p1
 k4.children << k1
 
 
-==The kits become a wrapper for the products.  To get back all the products
+=The kits become a wrapper for the products.  To get back all the products
 
 k3.all_products_including_children
 
