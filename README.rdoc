@@ -3,7 +3,7 @@
 rake db:setup
 
 
-==open a rails console & setup some local variables.
+=open a rails console & setup some local variables.
 p1 = Product.find 1
 
 p2 = Product.find 2
