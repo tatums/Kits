@@ -18,18 +18,30 @@ class Kit < ActiveRecord::Base
             :through => :child_relationships,
             :source => :child
 
-  has_many :products
 
-
+  has_many :kit_products
+  has_many :products, :through => :kit_products
+  
+  
   def all_products_including_children
     all_products ||= [] << products
-    children.each do |child_kit|
-      puts child_kit.id
-      all_products << child_kit.products
-      child_kit.all_products_including_children
-    end
-    return all_products.flatten
+     children.each do |child_kit|
+       puts child_kit.id
+       all_products << child_kit.products
+       child_kit.all_products_including_children
+     end
+     return all_products.flatten
   end
+
+  # def all_products_including_children
+  #   all_products ||= products
+  #   children.each do |child_kit|
+  #     puts child_kit.id
+  #     all_products << child_kit.products
+  #     child_kit.all_products_including_children
+  #   end
+  #   return all_products
+  # end
 
   def children_loop(xchildren)
     @ids ||= []

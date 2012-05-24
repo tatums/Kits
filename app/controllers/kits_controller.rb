@@ -9,6 +9,7 @@ class KitsController < ApplicationController
 
   def show
     @kit = Kit.find(params[:id])
+    @kits = @kit.children
     @products = @kit.all_products_including_children
     respond_to do |format|
       format.html
@@ -41,6 +42,7 @@ class KitsController < ApplicationController
 
   def update
     @kit = Kit.find(params[:id])
+    add_kit_to_kit_if_kit_present if params[:kit_id]
     respond_to do |format|
       if @kit.update_attributes(params[:kit])
         format.html { redirect_to @kit, notice: 'Kit was successfully updated.' }
@@ -59,4 +61,10 @@ class KitsController < ApplicationController
       format.html { redirect_to kits_url }
     end
   end
+
+  protected
+    def add_kit_to_kit_if_kit_present
+      @parent_kit = Kit.find(params[:kit_id])
+      @parent_kit.children << @kit
+    end
 end

@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120425030512) do
+ActiveRecord::Schema.define(:version => 20120524223156) do
+
+  create_table "kit_products", :force => true do |t|
+    t.integer  "kit_id"
+    t.integer  "product_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "kit_relationships", :force => true do |t|
     t.integer  "parent_id"

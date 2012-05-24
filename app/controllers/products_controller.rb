@@ -1,7 +1,13 @@
 class ProductsController < ApplicationController
 
   def index
-    @products = Product.all
+    if params[:kit_id]
+      @kit = Kit.find(params[:kit_id])
+      @products = @kit.products
+    else
+      @products = Product.all
+    end
+
     respond_to do |format|
       format.html
     end
@@ -15,7 +21,6 @@ class ProductsController < ApplicationController
   end
 
 
-
   def new
     @product = Product.new
     respond_to do |format|
@@ -27,7 +32,6 @@ class ProductsController < ApplicationController
   def edit
     @product = Product.find(params[:id])
   end
-
 
 
   def create
@@ -44,6 +48,7 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find(params[:id])
+    add_product_to_kit_if_kit_present if params[:kit_id]
     respond_to do |format|
       if @product.update_attributes(params[:product])
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
@@ -60,4 +65,13 @@ class ProductsController < ApplicationController
       format.html { redirect_to products_url }
     end
   end
+
+protected
+
+  def add_product_to_kit_if_kit_present
+    @kit = Kit.find(params[:kit_id])
+    @kit.products << @product
+  end
+
+
 end
