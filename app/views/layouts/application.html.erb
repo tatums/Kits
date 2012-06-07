@@ -10,7 +10,25 @@
 
   <div class="container-fluid">
       <div class="row-fluid">
-        <%= yield %>
+
+        <div class="span3">
+          <div class="well">
+            <ul class="nav nav-list">
+              <%= render 'layouts/navigation' %>
+            </ul>
+          </div><!--/.well -->
+          <%= yield :left_side %>
+
+        </div>
+
+        <div class="span6">
+          <%= yield %>
+        </div>
+
+        <div class="span3">
+          <%= yield :right_side %>
+        </div>
+
       </div>
   </div>
 

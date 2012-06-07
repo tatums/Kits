@@ -1,67 +1,50 @@
-<div class="span3">
-  <div class="well">
-    <ul class="nav nav-list">
-      <%= render 'layouts/navigation' %>
-    </ul>
-  </div><!--/.well -->
+<div class="well">
+  <h1><%= @kit.title %></h1>
+  <%= link_to 'Edit', edit_kit_path(@kit) %> |
+  <%= link_to 'Add Products to Kit' %>
 </div>
 
-<div class="span6">
-
-      <div class="well">
-        <p>
-          <b>Title:</b>
-          <%= @kit.title %>
-        </p>
-        <%= link_to 'Edit', edit_kit_path(@kit) %> |
-        <%= link_to 'Add Products to Kit' %>
-      </div>
-
-      <div class="well">
-        <h3>Child Kits</h3>
-        <ul>
-          <% @kits.each do |kit|  %>
-            <li><%= link_to kit.title, kit %></li>
-          <% end %>
-        </ul>
-      </div>
-
-      <div class="well">
-
-      <h3>Products that are in the is Kit</h3>
-        <table>
-          <%= render :partial => 'products/product', :collection => @kit.products %>
-        </table>
-      </div>
-
-      <div class="well">
-        <h3>All Products including child kits </h3>
-        <table>
-          <%= render :partial => 'products/product', :collection => @kit.all_products_including_children %>
-        </table>
-      </div>
-
+<div class="well">
+  <h3>Child Kits</h3>
+  <ul>
+    <% @kits.each do |kit|  %>
+      <li><%= link_to kit.title, kit %></li>
+    <% end %>
+  </ul>
 </div>
 
-<div class="span3">
+<div class="well">
 
-  <div class="well">
-    <h3>Add Kit to Kit</h3>
-    <ul>
-      <% Kit.all.each do |kit| %>
-        <li><%= link_to kit.title, [@kit, kit], :method => :put %></li>
-      <% end %>
-    </ul>
-  </div>
-
-  <div class="well">
-    <h3>Add Products to Kit</h3>
-    <ul>
-      <% Product.all.each do |product| %>
-        <li><%= link_to product.title, [@kit, product], :method => :put %></li>
-      <% end %>
-    </ul>
-  </div>
-
+<h3>Products that are in the is Kit</h3>
+  <table>
+    <%= render :partial => 'products/product', :collection => @kit.products %>
+  </table>
 </div>
-<%# link_to 'Add Product' %>
+
+<div class="well">
+  <h3>All Products including child kits </h3>
+  <table>
+    <%= render :partial => 'products/product', :collection => @kit.all_products_including_children %>
+  </table>
+</div>
+
+<% content_for :right_side do %>
+    <div class="well">
+      <h3>Add Kit to Kit</h3>
+      <ul>
+        <% Kit.all.each do |kit| %>
+          <li><%= link_to kit.title, [@kit, kit], :method => :put %></li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="well">
+      <h3>Add Products to Kit</h3>
+      <ul>
+        <% Product.all.each do |product| %>
+        <% binding.pry %>
+          <li><%= link_to product.title, [@kit, product], :method => :put %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
